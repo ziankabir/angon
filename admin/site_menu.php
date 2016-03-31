@@ -12,6 +12,7 @@
                 <li id="bannerActive"><a href="<?php echo baseUrl('admin/view/banner/list.php'); ?>"><i class="fa fa-circle-o"></i> Banner List</a></li>
                 <li id="projectActive"><a href="<?php echo baseUrl('admin/view/project/list.php'); ?>"><i class="fa fa-circle-o"></i> Project List</a></li>
                 <li id="newsActive"><a href="<?php echo baseUrl('admin/view/news/list.php'); ?>"><i class="fa fa-circle-o"></i> News List</a></li>
+                <li id="eventActive"><a href="<?php echo baseUrl('admin/view/event/list.php'); ?>"><i class="fa fa-circle-o"></i> Events List</a></li>
             </ul>
         </li>
         <li id="contactActive"><a href="<?php echo baseUrl('admin/view/contact/contact_list.php'); ?>"><i class="fa fa-comment"></i> Contact Information</a></li>

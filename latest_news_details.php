@@ -18,6 +18,19 @@ if ($result) {
     $news_date = $obj->news_date;
     $news_image = $obj->news_image;
 }
+
+
+
+$arrayME = array();
+$sqlME = "SELECT * FROM angon_event WHERE angon_event_status='Active' LIMIT 5";
+$resultME = mysqli_query($con, $sqlME);
+if ($resultME) {
+    while ($objME = mysqli_fetch_object($resultME)) {
+        $arrayME[] = $objME;
+    }
+} else {
+    
+}
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -26,9 +39,6 @@ if ($result) {
         <script src="js/modernizr.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-                <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-        <![endif]-->
         <div class="body"> 
             <header class="site-header">
                 <div class="topbar">
@@ -87,31 +97,25 @@ if ($result) {
                                 </article>
                             </div>
                             <div class="col-md-3 sidebar">
-                                <div class="widget sidebar-widget search-form-widget">
-                                    <div class="input-group input-group-lg">
-                                        <input type="text" class="form-control" placeholder="Search Posts...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button"><i class="fa fa-search fa-lg"></i></button>
-                                        </span>
+                                <?php if (count($arrayME) > 0): ?>
+                                    <div class="widget sidebar-widget">
+                                        <div class="sidebar-widget-title">
+                                            <h3>Upcoming Events</h3>
+                                        </div>
+                                        <ul>
+                                            <?php foreach ($arrayME AS $ME): ?>
+                                                <li class="item event-item clearfix">
+                                                    <div class="event-date"> <span class="date"><?php echo date('d', strtotime($ME->angon_event_date)); ?></span> <span class="month"><?php echo date('M', strtotime($ME->angon_event_date)); ?></span> </div>
+                                                    <div class="event-detail">
+                                                        <h4><a href="event-details.php?id=<?php echo $ME->angon_event_id; ?>"><?php echo $ME->angon_event_title; ?></a></h4>
+                                                        <span class="event-dayntime meta-data"><?php echo date('D', strtotime($ME->angon_event_date)); ?> | <?php echo $ME->angon_event_time; ?></span> 
+                                                    </div>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="widget sidebar-widget">
-                                    <div class="sidebar-widget-title">
-                                        <h3>Post Categories</h3>
-                                    </div>
-                                    <ul>
-                                        <li><a href="#">Faith</a> (10)</li>
-                                        <li><a href="#">Missions</a> (12)</li>
-                                        <li><a href="#">Salvation</a> (34)</li>
-                                        <li><a href="#">Worship</a> (14)</li>
-                                    </ul>
-                                </div>
-                                <div class="widget sidebar-widget">
-                                    <div class="sidebar-widget-title">
-                                        <h3>Post Tags</h3>
-                                    </div>
-                                    <div class="tag-cloud"> <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a href="#">Worship</a> <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a href="#">Worship</a> </div>
-                                </div>
+                                <?php endif; ?>
+                                
                             </div>
                         </div>
                     </div>

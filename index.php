@@ -3,14 +3,32 @@ include './config/config.php';
 $arraySlider = array();
 $sqlSlider = "SELECT * FROM banner WHERE banner_status = 'Active' ORDER BY banner_id DESC";
 $resultSlider = mysqli_query($con, $sqlSlider);
-if ($resultSlider){
+if ($resultSlider) {
     while ($objSlider = mysqli_fetch_object($resultSlider)) {
         $arraySlider[] = $objSlider;
     }
 } else {
     
 }
-//debug($arraySlider);
+
+$title = '';
+$short_details = '';
+$venue = '';
+$date = '';
+$image = '';
+// recent event
+$sqlRE = "SELECT * FROM angon_event WHERE angon_event_status='Active' ORDER BY angon_event_created_on DESC LIMIT 1";
+$resultRE = mysqli_query($con, $sqlRE);
+if ($resultRE) {
+    $objRE = mysqli_fetch_object($resultRE);
+    $title = $objRE->angon_event_title;
+    $short_details = $objRE->angon_event_short_details;
+    $date = $objRE->angon_event_date;
+    $image = $objRE->angon_event_image;
+    $venue = $objRE->angon_event_venue;
+} else {
+    
+}
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -82,27 +100,31 @@ if ($resultSlider){
                                     <?php include './latest_news.php'; ?>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6"> 
-                                <div class="listing sermons-listing">
-                                    <header class="listing-header">
-                                        <h3>Recent Event</h3>
-                                    </header>
-                                    <section class="listing-cont">
-                                        <ul>
-                                            <li class="item sermon featured-sermon"> <span class="date">2 January 2016</span>
+                            <?php ?>
+                            <?php if ($title != ''): ?>
+                                <div class="col-md-4 col-sm-6"> 
+                                    <div class="listing sermons-listing">
+                                        <header class="listing-header">
+                                            <h3>Recent Event</h3>
+                                        </header>
+                                        <section class="listing-cont">
+                                            <ul>
+                                                <li class="item sermon featured-sermon"> <span class="date"><?php echo date("j F Y", strtotime(($date))); ?></span>
 
-                                                <h4>Angon Swapnolok peace valley </h4>
-                                                <div class="featured-sermon-video">
-                                                    <img src="images/valleyjpg.jpg">
-                                                </div>
-                                                <span class="date">Dhaka, Bangladesh</span>
-                                                <p style="text-align: justify">Angon OLd Home has materialised its dream by completing formalities for purchasing land. Twenty individual, Institution or corporate bodies will be the owner of Twenty cottages at village Baniara under Singair upazila first of its kind in Bangladesh.</p>
+                                                    <h4><?php echo $title; ?> </h4>
+                                                    <div class="featured-sermon-video">
+                                                        <img src="<?php echo $config['IMAGE_UPLOAD_URL'] . '/angon_event_image/' . $image; ?>" alt="<?php echo $title; ?>">
+                                                    </div>
+                                                    <span class="date"><?php echo $venue; ?></span>
+                                                    <p style="text-align: justify"><?php echo html_entity_decode($short_details); ?></p>
+                                                    <a class="btn btn-default btn-sm" href="event-details.php?id=<?php echo $ME->angon_event_id; ?>">Read More</a>
 
-                                            </li>
-                                        </ul>
-                                    </section>
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -111,5 +133,4 @@ if ($resultSlider){
         </div>
         <?php include './footer_script.php'; ?>
     </body>
-    <!-- Mirrored from www.obhizatrik.foundation/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Mar 2016 17:01:29 GMT -->
 </html>

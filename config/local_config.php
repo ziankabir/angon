@@ -26,8 +26,8 @@ if ($domain == 'angon.com') {
     $config['DB_TYPE'] = 'mysql';
     $config['DB_HOST'] = 'localhost';
     $config['DB_NAME'] = 'arkhairu_angon';
-    $config['DB_USER'] = 'arkhairu_kk';
-    $config['DB_PASSWORD'] = 'kkrdf2016*1';
+    $config['DB_USER'] = 'arkhairu_angon';
+    $config['DB_PASSWORD'] = '@@123@@angon';
 } elseif ($domain == '192.168.0.103') {
     $config['SITE_NAME'] = 'angon';
     $config['ADMIN_SITE_NAME'] = 'ANGON | ADMIN PANEL';
