@@ -174,7 +174,7 @@
                                             <div class="accordion-heading accordionize"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionArea" href="#threeArea" style="font-size:20px"> Sponsor For Old People <i class="fa fa-angle-down"></i> </a> </div>
                                             <div id="threeArea" class="accordion-body collapse">
                                                 <div class="accordion-inner"> 
-                                                    <form method="POST" action="" accept-charset="UTF-8"><input name="_token" type="hidden" value="t3OkQub72RFZU5g89fC9OrRbVsM5zOy7pTRyIeku">
+                                                    <form method="POST" action="" accept-charset="UTF-8"><input name="_token" type="hidden" value="">
                                                         <div class="row">
                                                             <div class="form-group">
                                                                 <div class="col-md-6">
